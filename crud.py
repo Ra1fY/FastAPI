@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
 import hashlib
-from models import User, Task, TaskStatus
+from models import User, Task
 from schemas import UserCreate, TaskCreate, TaskUpdate
 
 # Хэширование пароля
