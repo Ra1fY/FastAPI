@@ -20,6 +20,7 @@ def get_user_by_email(db: Session, email: str) -> Optional[User]:
     return db.query(User).filter(User.email == email).first()
 
 def create_user(db: Session, user: UserCreate) -> User:
+    print(user, get_password_hash(user.password))
     hashed_password = get_password_hash(user.password)
     db_user = User(
         username=user.username,
