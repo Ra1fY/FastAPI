@@ -1,18 +1,17 @@
 meta:
-  name: task-manager-backend
-  version: 1.0.0
-
+  environment: python
+  toolchain:
+    name: pip
+    version: "3.11"
 build:
-  type: python
-  python_version: "3.11"
-  requirements: requirements.txt
-
+  requirementsPath: requirements.txt
+  useCache: true
 run:
-  type: web
-  command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
-  ports:
-    - 8000
-
+  scriptName: main.py
+  command: nuvicorn backend.main:app --host 0.0.0.0 --port 8000
+  persistenceMount: /data
+  containerPort: "8000"
+  servicePort: "8000"
 env:
   - name: DATABASE_URL
     value: sqlite:///./data/tasks.db
