@@ -16,7 +16,7 @@ class User(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String(50), unique=True, index=True, nullable=False)
-    email = Column(String(100), unique=True, index=True, nullable=False)  # Добавляем email
+    email = Column(String(100), unique=True, index=True, nullable=False)
     hashed_password = Column(String(255), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
@@ -28,8 +28,8 @@ class Task(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(200), index=True, nullable=False)
     description = Column(Text)
-    status = Column(Enum(TaskStatus), default=TaskStatus.PENDING)
-    priority = Column(Integer, default=3)  # 1-5, где 5 - наивысший
+    status = Column(Enum(TaskStatus, create_constraint=False, validate_strings=False), default=TaskStatus.PENDING)
+    priority = Column(Integer, default=3)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
