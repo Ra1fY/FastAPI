@@ -9,7 +9,7 @@ import os
 from dotenv import load_dotenv
 
 from database import get_db, init_db
-from models import User, Task, TaskStatus
+from models import User, Task
 from schemas import (
     TaskCreate, TaskUpdate, TaskResponse, 
     UserCreate, UserResponse, Token
