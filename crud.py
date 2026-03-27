@@ -34,6 +34,7 @@ def create_user(db: Session, user: UserCreate) -> User:
 
 def authenticate_user(db: Session, username: str, password: str):
     user = get_user_by_username(db, username)
+    print(user, get_password_hash(password), get_password_hash(password) == user.hashed_password)
     if not user or not verify_password(password, user.hashed_password):
         return None
     return user
