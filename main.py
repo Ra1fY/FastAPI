@@ -234,9 +234,9 @@ def get_statistics(
     
     stats = {
         "total": len(tasks),
-        "pending": len([t for t in tasks if t.status == TaskStatus.PENDING]),
-        "in_progress": len([t for t in tasks if t.status == TaskStatus.IN_PROGRESS]),
-        "completed": len([t for t in tasks if t.status == TaskStatus.COMPLETED]),
+        "pending": len([t for t in tasks if t.status == "pending"]),
+        "in_progress": len([t for t in tasks if t.status == "in_progress"]),
+        "completed": len([t for t in tasks if t.status == "completed"]),
         "avg_priority": sum(t.priority for t in tasks) / len(tasks) if tasks else 0,
         "high_priority": len([t for t in tasks if t.priority >= 4]),
     }

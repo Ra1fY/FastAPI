@@ -44,7 +44,7 @@ def create_task(db: Session, task: TaskCreate, user_id: int) -> Task:
     db_task = Task(
         title=task.title,
         description=task.description,
-        status=task.status,
+        status=task.status.value,
         priority=task.priority,
         user_id=user_id
     )
@@ -64,7 +64,10 @@ def update_task(db: Session, task_id: int, task_update: TaskUpdate) -> Task:
     update_data = task_update.model_dump(exclude_unset=True)
     
     for field, value in update_data.items():
-        setattr(db_task, field, value)
+        if field == "status" and value is not None:
+            setattr(db_task, field, value.value)
+        else:
+            setattr(db_task, field, value)
     
     db.commit()
     db.refresh(db_task)

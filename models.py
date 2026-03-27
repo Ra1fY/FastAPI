@@ -1,15 +1,10 @@
-from sqlalchemy import Column, Integer, String, DateTime, Text, Enum, ForeignKey
+# models.py
+from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-import enum
 
 Base = declarative_base()
-
-class TaskStatus(enum.Enum):
-    PENDING = "pending"
-    IN_PROGRESS = "in_progress"
-    COMPLETED = "completed"
 
 class User(Base):
     __tablename__ = "users"
@@ -28,7 +23,7 @@ class Task(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(200), index=True, nullable=False)
     description = Column(Text)
-    status = Column(Enum(TaskStatus, create_constraint=False, validate_strings=False), default=TaskStatus.PENDING)
+    status = Column(String(50), default="pending")
     priority = Column(Integer, default=3)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
