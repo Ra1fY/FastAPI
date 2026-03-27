@@ -1,0 +1,22 @@
+meta:
+  name: task-manager-backend
+  version: 1.0.0
+
+build:
+  type: python
+  python_version: "3.11"
+  requirements: requirements.txt
+
+run:
+  type: web
+  command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
+  ports:
+    - 8000
+
+env:
+  - name: DATABASE_URL
+    value: sqlite:///./data/tasks.db
+  - name: SECRET_KEY
+    value: dAUTiQ4_P-bL4iGhCL0wJTTj9VRnT6yqtdH0qmhokr8
+  - name: DEBUG
+    value: false
